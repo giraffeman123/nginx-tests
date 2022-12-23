@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  # Build the app services
+  app1:
+    container_name: app1
+    build: 
+      context: ./app1/
+      dockerfile: Dockerfile
+    #ports:
+    #  - 1000:3000
+  app2:
+    container_name: app2
+    build: 
+      context: ./app2/
+      dockerfile: Dockerfile   
+    #ports:
+    #  - 1001:3000
+  nginx:
+    container_name: nginx
+    build: 
+      context: ./load-balancer/
+      dockerfile: Dockerfile
+    # Bind the port 80 of container to machine port 80
+    ports:
+      - 80:80
+    # Make app as nginx dependency service
+    depends_on:
+      - app1
+      - app2
