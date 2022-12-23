@@ -19,7 +19,7 @@ services:
   nginx:
     container_name: nginx
     build: 
-      context: ./load-balancer/
+      context: ./nginx/
       dockerfile: Dockerfile
     # Bind the port 80 of container to machine port 80
     ports:
